@@ -19,10 +19,31 @@
     tr:nth-child(even) {
         background-color: #f9f9f9;
     }
+    form {
+        margin-bottom: 20px;
+    }
+    .filter-box {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+    }
+    .filter-box input {
+        padding: 8px;
+        font-size: 14px;
+    }
   </style>
 </head>
 <body>
 <h1>Lista delle Prenotazioni</h1>
+
+<!-- Box di filtro -->
+<div class="filter-box">
+  <input type="text" id="filterNomeCliente" placeholder="Filtra per Nome Cliente">
+  <input type="date" id="filterDataInizio" placeholder="Filtra per Data Inizio">
+  <input type="date" id="filterDataFine" placeholder="Filtra per Data Fine">
+</div>
+
+<!-- Tabella delle prenotazioni -->
 <table>
   <thead>
   <tr>
@@ -33,7 +54,7 @@
     <th>Azioni</th>
   </tr>
   </thead>
-  <tbody>
+  <tbody id="prenotazioniTable">
   <tr th:each="prenotazione : ${prenotazioni}">
     <td th:text="${prenotazione.nomeCliente}"></td>
     <td th:text="${prenotazione.numeroCani}"></td>
@@ -52,8 +73,46 @@
   </tr>
   </tbody>
 </table>
+
 <form action="/" method="get">
   <button type="submit">Torna alla home</button>
 </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterNomeCliente = document.getElementById('filterNomeCliente');
+    const filterDataInizio = document.getElementById('filterDataInizio');
+    const filterDataFine = document.getElementById('filterDataFine');
+    const tableRows = document.querySelectorAll('#prenotazioniTable tr');
+
+    // Funzione per filtrare la tabella
+    function filterTable() {
+      const nomeCliente = filterNomeCliente.value.toLowerCase();
+      const dataInizio = filterDataInizio.value;
+      const dataFine = filterDataFine.value;
+
+      tableRows.forEach(row => {
+        const tdNomeCliente = row.cells[0].textContent.toLowerCase();
+        const tdDataInizio = row.cells[2].textContent;
+        const tdDataFine = row.cells[3].textContent;
+
+        const matchesNomeCliente = !nomeCliente || tdNomeCliente.includes(nomeCliente);
+        const matchesDataInizio = !dataInizio || tdDataInizio >= dataInizio;
+        const matchesDataFine = !dataFine || tdDataFine <= dataFine;
+
+        if (matchesNomeCliente && matchesDataInizio && matchesDataFine) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // Aggiungi listener agli input
+    filterNomeCliente.addEventListener('input', filterTable);
+    filterDataInizio.addEventListener('input', filterTable);
+    filterDataFine.addEventListener('input', filterTable);
+  });
+</script>
 </body>
 </html>
