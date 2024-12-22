@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista Prenotazioni</title>
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+<h1>Lista delle Prenotazioni</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Nome Cliente</th>
+    <th>Numero Cani</th>
+    <th>Data Inizio</th>
+    <th>Data Fine</th>
+    <th>Azioni</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="prenotazione : ${prenotazioni}">
+    <td th:text="${prenotazione.nomeCliente}"></td>
+    <td th:text="${prenotazione.numeroCani}"></td>
+    <td th:text="${prenotazione.dataInizio}"></td>
+    <td th:text="${prenotazione.dataFine}"></td>
+    <td>
+      <form th:action="@{/elimina}" method="post" style="display:inline;">
+        <input type="hidden" th:name="id" th:value="${prenotazione.id}">
+        <button type="submit">Elimina</button>
+      </form>
+      <form th:action="@{/prenotazioni/modifica}" method="get" style="display:inline;">
+        <input type="hidden" th:name="id" th:value="${prenotazione.id}">
+        <button type="submit">Modifica</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<form action="/" method="get">
+  <button type="submit">Torna alla home</button>
+</form>
+</body>
+</html>

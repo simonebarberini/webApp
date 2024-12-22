@@ -3,12 +3,20 @@ package com.gestionalePensione.webApp.model;
 import java.time.LocalDate;
 
 public class Prenotazione {
+    private String id;
     private String nomeCliente;
     private int numeroCani;
     private LocalDate dataInizio;
     private LocalDate dataFine;
 
-    // Getter e Setter
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNomeCliente() {
         return nomeCliente;
     }

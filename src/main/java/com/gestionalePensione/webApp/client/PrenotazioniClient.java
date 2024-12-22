@@ -2,9 +2,7 @@ package com.gestionalePensione.webApp.client;
 
 import com.gestionalePensione.webApp.model.Prenotazione;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,10 +16,15 @@ public interface PrenotazioniClient {
     @PostMapping("/gestionalepensione/nuovaPrenotazione")
     void addPrenotazione(@RequestParam("nomeCliente") String nomeCliente,
                          @RequestParam("numeroCani") int numeroCani,
-                         @RequestParam("dataInizio") String dataInizio, // Cambiato a String
-                         @RequestParam("dataFine") String dataFine);   // Cambiato a String
+                         @RequestParam("dataInizio") String dataInizio,
+                         @RequestParam("dataFine") String dataFine);
+
 
     @GetMapping("/gestionalepensione/verificaDisponibilita")
-    Integer getDisponibilita(@RequestParam("dataInizio") String dataInizio, // Cambiato a String
-                             @RequestParam("dataFine") String dataFine);   // Cambiato a String
+    Integer getDisponibilita(@RequestParam("dataInizio") String dataInizio,
+                             @RequestParam("dataFine") String dataFine);
+
+    @DeleteMapping("/gestionalepensione/eliminaPrenotazione")
+     void eliminaPrenotazione(@RequestParam() String id);
+
 }
