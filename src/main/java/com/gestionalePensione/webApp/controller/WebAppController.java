@@ -29,6 +29,11 @@ public class WebAppController {
         return "nuovaPrenotazione";
     }
 
+    @GetMapping("/verificaDisponibilitaView")
+    public String verificaDisponibilitaView(){
+        return "verificaDisponibilita";
+    }
+
     @PostMapping("/submitPrenotazione")
     public String submitPrenotazione(@RequestParam String nomeCliente,
                                      @RequestParam int numeroCani,
@@ -54,4 +59,16 @@ public class WebAppController {
         prenotazioniClient.eliminaPrenotazione(id);
         return "redirect:/listaPrenotazioniView";
     }
+
+
+    @PostMapping("/verificaDisponibilita")
+    public String verificaDisponibilita(@RequestParam String dataInizio, @RequestParam String dataFine, Model model){
+        Integer disponibilita = prenotazioniClient.getDisponibilita(dataInizio, dataFine);
+        model.addAttribute("disponibilita", disponibilita);
+        model.addAttribute("dataInizio", dataInizio);
+        model.addAttribute("dataFine", dataFine);
+        return "verificaDisponibilita";
+    }
+
+
 }

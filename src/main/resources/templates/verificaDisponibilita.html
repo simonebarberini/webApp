@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifica Disponibilità</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+        label {
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Verifica Disponibilità</h1>
+
+<form action="/verificaDisponibilita" method="post">
+    <label for="dataInizio">Data Inizio:</label>
+    <input
+            type="date"
+            id="dataInizio"
+            name="dataInizio"
+            required
+            th:value="${dataInizio != null ? dataInizio : ''}">
+
+    <label for="dataFine">Data Fine:</label>
+    <input
+            type="date"
+            id="dataFine"
+            name="dataFine"
+            required
+            th:value="${dataFine != null ? dataFine : ''}">
+
+    <button type="submit">Verifica</button>
+</form>
+
+<!-- Mostra il risultato se disponibile -->
+<div th:if="${disponibilita != null}" style="margin-top: 20px;">
+    <h2>Disponibilità: <span th:text="${disponibilita}">0</span></h2>
+</div>
+</body>
+</html>
