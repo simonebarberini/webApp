@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuova Prenotazione</title>
+</head>
+  <body>
+  <form action="/submitPrenotazione" method="post">
+    <!-- Nome Cliente -->
+    <label for="nomeCliente">Nome Cliente:</label>
+    <input type="text" id="nomeCliente" name="nomeCliente" required>
+    <br><br>
+
+    <!-- Numero di Cani -->
+    <label for="numeroCani">Numero di Cani:</label>
+    <input type="number" id="numeroCani" name="numeroCani" min="1" required>
+    <br><br>
+
+    <!-- Data Inizio -->
+    <label for="dataInizio">Data Inizio:</label>
+    <input type="date" id="dataInizio" name="dataInizio" required>
+    <br><br>
+
+    <!-- Data Fine -->
+    <label for="dataFine">Data Fine:</label>
+    <input type="date" id="dataFine" name="dataFine" required>
+    <br><br>
+
+    <!-- Bottone per inviare il form -->
+    <button type="submit">Aggiungi Prenotazione</button>
+  </form>
+</body>
+</html>
+</body>
+</html>
