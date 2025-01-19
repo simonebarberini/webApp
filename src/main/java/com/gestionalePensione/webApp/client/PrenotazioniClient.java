@@ -7,24 +7,24 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@FeignClient(name = "gestionalegateway")
+@FeignClient(name = "gestionalepensione")
 public interface PrenotazioniClient {
 
-    @GetMapping("/gestionalepensione/prenotazioni")
+    @GetMapping("/prenotazioni")
     List<Prenotazione> getAllPrenotazioni();
 
-    @PostMapping("/gestionalepensione/nuovaPrenotazione")
+    @PostMapping("/nuovaPrenotazione")
     void addPrenotazione(@RequestParam("nomeCliente") String nomeCliente,
                          @RequestParam("numeroCani") int numeroCani,
                          @RequestParam("dataInizio") String dataInizio,
                          @RequestParam("dataFine") String dataFine);
 
 
-    @GetMapping("/gestionalepensione/verificaDisponibilita")
+    @GetMapping("/verificaDisponibilita")
     Integer getDisponibilita(@RequestParam("dataInizio") String dataInizio,
                              @RequestParam("dataFine") String dataFine);
 
-    @DeleteMapping("/gestionalepensione/eliminaPrenotazione")
+    @DeleteMapping("/eliminaPrenotazione")
      void eliminaPrenotazione(@RequestParam() String id);
 
 }
